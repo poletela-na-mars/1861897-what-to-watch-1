@@ -1,13 +1,14 @@
-import FilmCard from '../../components/film-card/film-card';
+import {filmList} from './film-list';
+import {FilmCard} from '../../components';
 
 type MainPageProps = {
   nameFilm: string;
   genreFilm: string;
   releaseYearFilm: number;
-}
+};
 
 const MainPage = (props: MainPageProps): JSX.Element => (
-  <body>
+  <>
     <div className="visually-hidden">
       <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
         <symbol id="add" viewBox="0 0 19 20">
@@ -138,28 +139,8 @@ const MainPage = (props: MainPageProps): JSX.Element => (
           </li>
         </ul>
 
-        {/*TODO - FilmCard list to a separate file*/}
         <div className="catalog__films-list">
-          <FilmCard imgSrc={'img/fantastic-beasts-the-crimes-of-grindelwald.jpg'} imgAlt={'Fantastic Beasts: The Crimes of Grindelwald'} filmName={'Fantastic Beasts: The Crimes of Grindelwald'} />
-          <FilmCard imgSrc={'img/bohemian-rhapsody.jpg'} imgAlt={'Bohemian Rhapsody'} filmName={'Bohemian Rhapsody'} />
-          <FilmCard imgSrc={'img/macbeth.jpg'} imgAlt={'Macbeth'} filmName={'Macbeth'} />
-          <FilmCard imgSrc={'img/aviator.jpg'} imgAlt={'Aviator'} filmName={'Aviator'} />
-          <FilmCard imgSrc={'img/we-need-to-talk-about-kevin.jpg'} imgAlt={'We need to talk about Kevin'} filmName={'We need to talk about Kevin'} />
-          <FilmCard imgSrc={'img/what-we-do-in-the-shadows.jpg'} imgAlt={'What We Do in the Shadows'} filmName={'What We Do in the Shadows'} />
-          <FilmCard imgSrc={'img/revenant.jpg'} imgAlt={'Revenant'} filmName={'Revenant'} />
-          <FilmCard imgSrc={'img/johnny-english.jpg'} imgAlt={'Johnny English'} filmName={'Johnny English'} />
-          <FilmCard imgSrc={'img/shutter-island.jpg'} imgAlt={'Shutter Island'} filmName={'Shutter Island'} />
-          <FilmCard imgSrc={'img/pulp-fiction.jpg'} imgAlt={'Pulp Fiction'} filmName={'Pulp Fiction'} />
-          <FilmCard imgSrc={'img/no-country-for-old-men.jpg'} imgAlt={'No Country for Old Men'} filmName={'No Country for Old Men'} />
-          <FilmCard imgSrc={'img/snatch.jpg'} imgAlt={'Snatch'} filmName={'Snatch'} />
-          <FilmCard imgSrc={'img/moonrise-kingdom.jpg'} imgAlt={'Moonrise Kingdom'} filmName={'Moonrise Kingdom'} />
-          <FilmCard imgSrc={'img/seven-years-in-tibet.jpg'} imgAlt={'Seven Years in Tibet'} filmName={'Seven Years in Tibet'} />
-          <FilmCard imgSrc={'img/midnight-special.jpg'} imgAlt={'Midnight Special'} filmName={'Midnight Special'} />
-          <FilmCard imgSrc={'img/war-of-the-worlds.jpg'} imgAlt={'War of the Worlds'} filmName={'War of the Worlds'} />
-          <FilmCard imgSrc={'img/dardjeeling-limited.jpg'} imgAlt={'Dardjeeling Limited'} filmName={'Dardjeeling Limited'} />
-          <FilmCard imgSrc={'img/orlando.jpg'} imgAlt={'Orland'} filmName={'Orlando'} />
-          <FilmCard imgSrc={'img/mindhunter.jpg'} imgAlt={'Mindhunter'} filmName={'Mindhunter'} />
-          <FilmCard imgSrc={'img/midnight-special.jpg'} imgAlt={'Midnight Special'} filmName={'Midnight Special'} />
+          {filmList.map((film) => <FilmCard key={film.filmName} imgSrc={film.imgSrc} imgAlt={film.imgAlt} filmName={film.filmName} />)}
         </div>
 
         <div className="catalog__more">
@@ -181,7 +162,7 @@ const MainPage = (props: MainPageProps): JSX.Element => (
         </div>
       </footer>
     </div>
-  </body>
+  </>
 );
 
 export default MainPage;
