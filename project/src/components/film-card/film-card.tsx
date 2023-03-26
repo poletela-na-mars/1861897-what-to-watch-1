@@ -4,7 +4,7 @@ type FilmCardProps = {
   filmName: string;
 }
 
-const FilmCard = (props: FilmCardProps): JSX.Element => (
+export const FilmCard = (props: FilmCardProps): JSX.Element => (
   <article className="small-film-card catalog__films-card">
     <div className="small-film-card__image">
       <img src={props.imgSrc} alt={props.imgAlt} width="280" height="175" />
@@ -14,5 +14,3 @@ const FilmCard = (props: FilmCardProps): JSX.Element => (
     </h3>
   </article>
 );
-
-export default FilmCard;
