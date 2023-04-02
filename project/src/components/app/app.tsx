@@ -1,10 +1,16 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {MainPage, AddReview, Film, MyList, Player, SignIn, NotFound} from '../../pages';
-import {AppRoute, AuthorizationStatus} from '../../const';
-import {MainPageProps} from '../../pages/main-page/main-page';
-import {PrivateRoute} from '../private-route/private-route';
 
-export const App = (props: MainPageProps): JSX.Element => (
+import {PrivateRoute} from '../private-route/private-route';
+import {MainPage, AddReview, Film, MyList, Player, SignIn, NotFound} from '../../pages';
+
+import FilmType from '../../types/film-type';
+import {AppRoute, AuthorizationStatus} from '../../const';
+
+type AppProps = {
+  films: FilmType[];
+};
+
+export const App = (props: AppProps): JSX.Element => (
   <BrowserRouter>
     <Routes>
       <Route
@@ -13,15 +19,15 @@ export const App = (props: MainPageProps): JSX.Element => (
       />
       <Route
         path={AppRoute.MainPage}
-        element={<MainPage {...props}/>}
+        element={<MainPage films={props.films} />}
       />
       <Route
         path={AppRoute.AddReview}
-        element={<AddReview />}
+        element={<AddReview films={props.films} />}
       />
       <Route
         path={AppRoute.Film}
-        element={<Film />}
+        element={<Film films={props.films}/>}
       />
       <Route
         path={AppRoute.MyList}
@@ -29,13 +35,13 @@ export const App = (props: MainPageProps): JSX.Element => (
           <PrivateRoute
             authorizationStatus={AuthorizationStatus.NoAuth}
           >
-            <MyList />
+            <MyList films={props.films} />
           </PrivateRoute>
         }
       />
       <Route
         path={AppRoute.Player}
-        element={<Player />}
+        element={<Player films={props.films}/>}
       />
       <Route
         path={AppRoute.SignIn}

@@ -1,10 +1,9 @@
-import {filmList} from './film-list';
-import {FilmCard} from '../../components';
+import {FilmList} from '../../components';
+import FilmType from '../../types/film-type';
+import {Link} from 'react-router-dom';
 
 type MainPageProps = {
-  nameFilm: string;
-  genreFilm: string;
-  releaseYearFilm: number;
+  films: FilmType[];
 };
 
 const MainPage = (props: MainPageProps): JSX.Element => (
@@ -43,7 +42,7 @@ const MainPage = (props: MainPageProps): JSX.Element => (
 
     <section className="film-card">
       <div className="film-card__bg">
-        <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+        <img src={props.films[0].backgroundImage} alt={props.films[0].name} />
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -72,23 +71,23 @@ const MainPage = (props: MainPageProps): JSX.Element => (
       <div className="film-card__wrap">
         <div className="film-card__info">
           <div className="film-card__poster">
-            <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+            <img src={props.films[0].posterImage} alt={`${props.films[0].name} poster`} width="218" height="327" />
           </div>
 
           <div className="film-card__desc">
-            <h2 className="film-card__title">{props.nameFilm}</h2>
+            <h2 className="film-card__title">{props.films[0].name}</h2>
             <p className="film-card__meta">
-              <span className="film-card__genre">{props.genreFilm}</span>
-              <span className="film-card__year">{props.releaseYearFilm}</span>
+              <span className="film-card__genre">{props.films[0].genre}</span>
+              <span className="film-card__year">{props.films[0].released}</span>
             </p>
 
             <div className="film-card__buttons">
-              <button className="btn btn--play film-card__button" type="button">
+              <Link to={`/player/${props.films[0].id}`} className="btn btn--play film-card__button">
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
                 <span>Play</span>
-              </button>
+              </Link>
               <button className="btn btn--list film-card__button" type="button">
                 <svg viewBox="0 0 19 20" width="19" height="20">
                   <use xlinkHref="#add"></use>
@@ -140,7 +139,7 @@ const MainPage = (props: MainPageProps): JSX.Element => (
         </ul>
 
         <div className="catalog__films-list">
-          {filmList.map((film) => <FilmCard key={film.filmName} imgSrc={film.imgSrc} imgAlt={film.imgAlt} filmName={film.filmName} />)}
+          <FilmList films={props.films} />
         </div>
 
         <div className="catalog__more">
@@ -166,4 +165,3 @@ const MainPage = (props: MainPageProps): JSX.Element => (
 );
 
 export default MainPage;
-export type {MainPageProps};
