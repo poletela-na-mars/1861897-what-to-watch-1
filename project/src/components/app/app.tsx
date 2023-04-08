@@ -10,6 +10,7 @@ type AppProps = {
   films: FilmType[];
 };
 
+// TODO - вынести header, добавить недостающую маршрутизацию
 export const App = (props: AppProps): JSX.Element => (
   <BrowserRouter>
     <Routes>
