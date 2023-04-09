@@ -1,28 +1,14 @@
 import {Link, Navigate, useParams} from 'react-router-dom';
 
-import {FilmList} from '../../components';
+import {RelatedFilms, Tabs} from '../../components';
 
 import FilmType from '../../types/film-type';
-import { AppRoute } from '../../const';
+import ReviewType from '../../types/review-type';
+import {AppRoute} from '../../const';
 
 type FilmPageProps = {
   films: FilmType[];
-};
-
-const getRatingLevel = (ratingCount: number): string => {
-  let ratingLevel;
-  if (ratingCount < 3) {
-    ratingLevel = 'Bad';
-  } else if (ratingCount < 5) {
-    ratingLevel = 'Normal';
-  } else if (ratingCount < 8) {
-    ratingLevel = 'Good';
-  } else if (ratingCount < 10) {
-    ratingLevel = 'Very good';
-  } else {
-    ratingLevel = 'Awesome';
-  }
-  return ratingLevel;
+  reviews: ReviewType[];
 };
 
 const Film = (props: FilmPageProps): JSX.Element => {
@@ -37,7 +23,7 @@ const Film = (props: FilmPageProps): JSX.Element => {
         <section style={{'background': `${film.backgroundColor}`}} className="film-card film-card--full">
           <div className="film-card__hero">
             <div className="film-card__bg">
-              <img src={film.backgroundImage} alt={film.name}/>
+              <img src={film.backgroundImage} alt={film.name} />
             </div>
 
             <h1 className="visually-hidden">WTW</h1>
@@ -94,39 +80,9 @@ const Film = (props: FilmPageProps): JSX.Element => {
           <div className="film-card__wrap film-card__translate-top">
             <div className="film-card__info">
               <div className="film-card__poster film-card__poster--big">
-                <img src={film.posterImage} alt={`${film.name} poster`} width="218" height="327"/>
+                <img src={film.posterImage} alt={`${film.name} poster`} width="218" height="327" />
               </div>
-
-              <div className="film-card__desc">
-                <nav className="film-nav film-card__nav">
-                  <ul className="film-nav__list">
-                    <li className="film-nav__item film-nav__item--active">
-                      <a href="#" className="film-nav__link">Overview</a>
-                    </li>
-                    <li className="film-nav__item">
-                      <a href="#" className="film-nav__link">Details</a>
-                    </li>
-                    <li className="film-nav__item">
-                      <a href="#" className="film-nav__link">Reviews</a>
-                    </li>
-                  </ul>
-                </nav>
-
-                <div className="film-rating">
-                  <div className="film-rating__score">{film.rating}</div>
-                  <p className="film-rating__meta">
-                    <span className="film-rating__level">{getRatingLevel(film.rating)}</span>
-                    <span className="film-rating__count">{film.scoresCount} ratings</span>
-                  </p>
-                </div>
-
-                <div className="film-card__text">
-                  <p>{film.description}</p>
-
-                  <p className="film-card__director"><strong>Director: {film.director}</strong></p>
-                  <p className="film-card__starring"><strong>Starring: {film.starring.join(', ')}</strong></p>
-                </div>
-              </div>
+              <Tabs film={film} reviews={props.reviews} />
             </div>
           </div>
         </section>
@@ -136,7 +92,7 @@ const Film = (props: FilmPageProps): JSX.Element => {
             <h2 className="catalog__title">More like this</h2>
 
             <div className="catalog__films-list">
-              <FilmList films={props.films} />
+              <RelatedFilms films={props.films} currentFilm={film} />
             </div>
           </section>
 
