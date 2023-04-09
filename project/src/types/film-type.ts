@@ -19,3 +19,5 @@ type FilmType = {
 };
 
 export default FilmType;
+
+// TODO - add index.ts for types directory

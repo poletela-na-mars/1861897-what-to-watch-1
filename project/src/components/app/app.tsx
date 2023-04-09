@@ -4,10 +4,12 @@ import {PrivateRoute} from '../private-route/private-route';
 import {MainPage, AddReview, Film, MyList, Player, SignIn, NotFound} from '../../pages';
 
 import FilmType from '../../types/film-type';
+import ReviewType from '../../types/review-type';
 import {AppRoute, AuthorizationStatus} from '../../const';
 
 type AppProps = {
   films: FilmType[];
+  reviews: ReviewType[];
 };
 
 // TODO - вынести header, добавить недостающую маршрутизацию
@@ -28,7 +30,7 @@ export const App = (props: AppProps): JSX.Element => (
       />
       <Route
         path={AppRoute.Film}
-        element={<Film films={props.films}/>}
+        element={<Film films={props.films} reviews={props.reviews} />}
       />
       <Route
         path={AppRoute.MyList}
