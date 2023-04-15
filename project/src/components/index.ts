@@ -10,3 +10,4 @@ export {RelatedFilms} from './related-films/related-films';
 export {FilmOverview} from './film-overview/film-overview';
 export {FilmDetails} from './film-details/film-details';
 export {FilmReviews} from './film-reviews/film-reviews';
+export {GenresList} from './genres-list/genres-list';
