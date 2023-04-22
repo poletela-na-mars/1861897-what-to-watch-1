@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {Provider} from 'react-redux';
-import {App} from './components';
+import { App, ErrorMessage } from './components';
 import {store} from './store';
-import { loadFilm } from './store/action';
+import { checkAuthorizationStatus, loadFilm } from './store/action';
 
 import REVIEWS from './mocks/reviews';
 
@@ -12,10 +12,12 @@ const root = ReactDOM.createRoot(
 );
 
 store.dispatch(loadFilm());
+store.dispatch(checkAuthorizationStatus());
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <ErrorMessage />
       <App reviews={REVIEWS}/>
     </Provider>
   </React.StrictMode>,

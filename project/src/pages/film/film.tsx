@@ -1,9 +1,8 @@
 import { Link, Navigate, useParams } from 'react-router-dom';
-import { RelatedFilms, Tabs } from '../../components';
+import { Footer, Logo, RelatedFilms, SignIn, SignOut, Tabs } from '../../components';
 import { useAppSelector } from '../../hooks';
 
-import { AppRoute } from '../../const';
-
+import { AppRoute, AuthorizationStatus } from '../../const';
 import ReviewType from '../../types/review-type';
 
 type FilmPageProps = {
@@ -11,6 +10,7 @@ type FilmPageProps = {
 };
 
 const Film = (props: FilmPageProps): JSX.Element => {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const id = Number(useParams().id);
   const films = useAppSelector((state) => state.films);
   const film = films.find((f) => f.id === id);
@@ -23,30 +23,14 @@ const Film = (props: FilmPageProps): JSX.Element => {
         <section style={{'background': `${film.backgroundColor}`}} className="film-card film-card--full">
           <div className="film-card__hero">
             <div className="film-card__bg">
-              <img src={film.backgroundImage} alt={film.name} />
+              <img src={film.backgroundImage} alt={film.name}/>
             </div>
 
             <h1 className="visually-hidden">WTW</h1>
 
             <header className="page-header film-card__head">
-              <div className="logo">
-                <a href="main.html" className="logo__link">
-                  <span className="logo__letter logo__letter--1">W</span>
-                  <span className="logo__letter logo__letter--2">T</span>
-                  <span className="logo__letter logo__letter--3">W</span>
-                </a>
-              </div>
-
-              <ul className="user-block">
-                <li className="user-block__item">
-                  <div className="user-block__avatar">
-                    <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                  </div>
-                </li>
-                <li className="user-block__item">
-                  <a className="user-block__link">Sign out</a>
-                </li>
-              </ul>
+              <Logo />
+              {authorizationStatus === AuthorizationStatus.Auth ? <SignOut /> : <SignIn />}
             </header>
 
             <div className="film-card__wrap">
@@ -60,13 +44,13 @@ const Film = (props: FilmPageProps): JSX.Element => {
                 <div className="film-card__buttons">
                   <Link to={`/player/${film.id}`} className="btn btn--play film-card__button">
                     <svg viewBox="0 0 19 19" width="19" height="19">
-                      <use xlinkHref="#play-s"></use>
+                      <use xlinkHref="#play-s" />
                     </svg>
                     <span>Play</span>
                   </Link>
                   <button className="btn btn--list film-card__button" type="button">
                     <svg viewBox="0 0 19 20" width="19" height="20">
-                      <use xlinkHref="#add"></use>
+                      <use xlinkHref="#add" />
                     </svg>
                     <span>My list</span>
                     <span className="film-card__count">9</span>
@@ -80,7 +64,7 @@ const Film = (props: FilmPageProps): JSX.Element => {
           <div className="film-card__wrap film-card__translate-top">
             <div className="film-card__info">
               <div className="film-card__poster film-card__poster--big">
-                <img src={film.posterImage} alt={`${film.name} poster`} width="218" height="327" />
+                <img src={film.posterImage} alt={`${film.name} poster`} width="218" height="327"/>
               </div>
               <Tabs film={film} reviews={props.reviews} />
             </div>
@@ -96,19 +80,7 @@ const Film = (props: FilmPageProps): JSX.Element => {
             </div>
           </section>
 
-          <footer className="page-footer">
-            <div className="logo">
-              <a href="main.html" className="logo__link logo__link--light">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
-
-            <div className="copyright">
-              <p>© 2019 What to watch Ltd.</p>
-            </div>
-          </footer>
+          <Footer/>
         </div>
       </>
     );
