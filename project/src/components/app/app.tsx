@@ -1,14 +1,17 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
 
-import {PrivateRoute} from '../private-route/private-route';
-import {MainPage, AddReview, Film, MyList, Player, SignIn, NotFound} from '../../pages';
-import {Spinner} from '../spinner/spinner';
+import { PrivateRoute } from '../private-route/private-route';
+import { MainPage, AddReview, Film, MyList, Player, SignIn, NotFound } from '../../pages';
+import { Spinner } from '../spinner/spinner';
 
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {filterFilmsByCurrentGenre} from '../../store/action';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { filterFilmsByCurrentGenre } from '../../store/action';
 
 import ReviewType from '../../types/review-type';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import { AppRoute } from '../../const';
+import browserHistory from '../../services/browser-history';
+import { HistoryRouter } from '../history-route/history-route';
 
 type AppProps = {
   reviews: ReviewType[];
@@ -17,18 +20,22 @@ type AppProps = {
 // TODO - вынести header
 export const App = (props: AppProps): JSX.Element => {
   const dispatch = useAppDispatch();
-  dispatch(filterFilmsByCurrentGenre());
+
+  useEffect(() => {
+    dispatch(filterFilmsByCurrentGenre());
+  }, [dispatch]);
+
   const isDataLoading = useAppSelector((state) => state.isDataLoading);
 
   if (isDataLoading) {
-    return (<Spinner/>);
+    return (<Spinner />);
   } else {
     return (
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route
             path={AppRoute.MainPage}
-            element={<MainPage/>}
+            element={<MainPage />}
           />
           <Route
             path={AppRoute.SignIn}
@@ -37,9 +44,7 @@ export const App = (props: AppProps): JSX.Element => {
           <Route
             path={AppRoute.MyList}
             element={
-              <PrivateRoute
-                authorizationStatus={AuthorizationStatus.Auth}
-              >
+              <PrivateRoute>
                 <MyList />
               </PrivateRoute>
             }
@@ -61,7 +66,7 @@ export const App = (props: AppProps): JSX.Element => {
             element={<NotFound />}
           />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     );
   }
 };

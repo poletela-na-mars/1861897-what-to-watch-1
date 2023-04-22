@@ -16,9 +16,13 @@ export enum AuthorizationStatus {
 
 export enum ApiRoute {
   Films = '/films',
+  Login = '/login',
+  Logout = '/logout',
 }
 
 export const ALL_GENRES = 'All genres';
 export const DEFAULT_GENRE = ALL_GENRES;
 
 export const FILM_IN_PAGE = 8;
+
+export const TIMEOUT_SHOW_ERROR = 5000;
