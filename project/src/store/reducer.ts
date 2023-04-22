@@ -1,16 +1,19 @@
-import {createReducer} from '@reduxjs/toolkit';
-import {ALL_GENRES, DEFAULT_GENRE} from '../const';
-import {changeGenre, fillFilms, filterFilmsByCurrentGenre} from './action';
+import { createReducer } from '@reduxjs/toolkit';
+import { changeGenre, fillFilms, filterFilmsByCurrentGenre, setDataLoading } from './action';
+
+import { ALL_GENRES, DEFAULT_GENRE } from '../const';
 import FilmType from '../types/film-type';
 
-const initState : {
+const initState: {
   films: FilmType[];
   filteredFilms: FilmType[];
   currentGenre: string;
+  isDataLoading: boolean;
 } = {
   films: [],
   filteredFilms: [],
   currentGenre: DEFAULT_GENRE,
+  isDataLoading: false,
 };
 
 const reducer = createReducer(initState, ((builder) => {
@@ -22,8 +25,12 @@ const reducer = createReducer(initState, ((builder) => {
       state.films = action.payload;
     }))
     .addCase(filterFilmsByCurrentGenre, (state) => {
-      state.filteredFilms = state.currentGenre === ALL_GENRES ? state.films : state.films.filter((film) => film.genre === state.currentGenre);
-    });
+      state.filteredFilms = state.currentGenre === ALL_GENRES ? state.films :
+        state.films.filter((film) => film.genre === state.currentGenre);
+    })
+    .addCase(setDataLoading, ((state, action) => {
+      state.isDataLoading = action.payload;
+    }));
 }));
 
 export default reducer;

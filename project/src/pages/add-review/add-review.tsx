@@ -1,16 +1,13 @@
 import {Link, Navigate, useParams} from 'react-router-dom';
 import {ReviewForm} from '../../components';
+import { useAppSelector } from '../../hooks';
 
 import {AppRoute} from '../../const';
-import FilmType from '../../types/film-type';
 
-type AddReviewProps = {
-  films: FilmType[];
-};
-
-const AddReview = (props: AddReviewProps): JSX.Element => {
+const AddReview = (): JSX.Element => {
   const id = Number(useParams().id);
-  const film = props.films.find((f) => f.id === id);
+  const films = useAppSelector((state) => state.films);
+  const film = films.find((f) => f.id === id);
 
   if (!film) {
     return <Navigate to={AppRoute.NotFound} />;

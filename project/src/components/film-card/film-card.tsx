@@ -31,8 +31,8 @@ export const FilmCard = (props: FilmCardProps): JSX.Element => {
     >
       <div className="small-film-card__image">
         {isPlaying
-          ? <Player videoSrc={props.film.previewVideoLink} posterImageSrc={props.film.posterImage} muted />
-          : <img src={props.film.posterImage} alt={props.film.name} width="280" height="175" />}
+          ? <Player videoSrc={props.film.previewVideoLink} posterImageSrc={props.film.previewImage} muted />
+          : <img src={props.film.previewImage} alt={props.film.name} width="280" height="175" />}
       </div>
       <h3 className="small-film-card__title">
         <Link to={`/films/${props.film.id}`} className="small-film-card__link">{props.film.name}</Link>
