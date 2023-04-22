@@ -1,19 +1,19 @@
-import {Link, Navigate, useParams} from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
+import { RelatedFilms, Tabs } from '../../components';
+import { useAppSelector } from '../../hooks';
 
-import {RelatedFilms, Tabs} from '../../components';
+import { AppRoute } from '../../const';
 
-import FilmType from '../../types/film-type';
 import ReviewType from '../../types/review-type';
-import {AppRoute} from '../../const';
 
 type FilmPageProps = {
-  films: FilmType[];
   reviews: ReviewType[];
 };
 
 const Film = (props: FilmPageProps): JSX.Element => {
   const id = Number(useParams().id);
-  const film = props.films.find((f) => f.id === id);
+  const films = useAppSelector((state) => state.films);
+  const film = films.find((f) => f.id === id);
 
   if (!film) {
     return (<Navigate to={AppRoute.NotFound} />);
@@ -92,7 +92,7 @@ const Film = (props: FilmPageProps): JSX.Element => {
             <h2 className="catalog__title">More like this</h2>
 
             <div className="catalog__films-list">
-              <RelatedFilms films={props.films} currentFilm={film} />
+              <RelatedFilms films={films} currentFilm={film} />
             </div>
           </section>
 
