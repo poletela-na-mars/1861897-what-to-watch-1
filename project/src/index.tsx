@@ -1,24 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {Provider} from 'react-redux';
-import { App, ErrorMessage } from './components';
-import {store} from './store';
-import { checkAuthorizationStatus, loadFilm } from './store/action';
+import { Provider } from 'react-redux';
 
-import REVIEWS from './mocks/reviews';
+import { App, ErrorMessage } from './components';
+import { store } from './store';
+import { checkAuthorizationStatus, loadFilms, loadPromoFilm } from './store/action';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
-store.dispatch(loadFilm());
+store.dispatch(loadFilms());
+store.dispatch(loadPromoFilm());
 store.dispatch(checkAuthorizationStatus());
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ErrorMessage />
-      <App reviews={REVIEWS}/>
+      <App />
     </Provider>
   </React.StrictMode>,
 );
