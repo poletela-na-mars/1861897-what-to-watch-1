@@ -15,9 +15,12 @@ export enum AuthorizationStatus {
 }
 
 export enum ApiRoute {
-  Films = '/films',
+  Films = '/films/',
   Login = '/login',
   Logout = '/logout',
+  Promo = '/promo',
+  Reviews = '/comments/',
+  Similar = '/similar',
 }
 
 export const ALL_GENRES = 'All genres';

@@ -7,6 +7,7 @@ type PrivateRouteProps = {
 };
 
 export const PrivateRoute = (props: PrivateRouteProps): JSX.Element => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-return
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   return (

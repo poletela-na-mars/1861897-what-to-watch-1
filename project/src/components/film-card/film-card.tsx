@@ -32,6 +32,7 @@ export const FilmCard = (props: FilmCardProps): JSX.Element => {
       className="small-film-card catalog__films-card"
       onMouseEnter={() => props.setActiveFilmCard(props.film.id)}
       onMouseLeave={() => props.setActiveFilmCard(NaN)}
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return
       onClick={() => dispatch(redirectToRoute(`/films/${props.film.id}`))}
     >
       <div className="small-film-card__image">

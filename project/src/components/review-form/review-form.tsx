@@ -1,7 +1,26 @@
-import {ChangeEvent, Fragment, useState} from 'react';
+import { ChangeEvent, FormEvent, Fragment, useState } from 'react';
+import { Navigate } from 'react-router-dom';
+
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { addReview } from '../../store/action';
+
+import { AppRoute } from '../../const';
 
 export const ReviewForm = () => {
   const [reviewData, setReviewData] = useState({rating: 8, text: '',});
+
+  const dispatch = useAppDispatch();
+
+  const film = useAppSelector((state) => state.currentFilm);
+
+  if (!film) {
+    return (<Navigate to={AppRoute.NotFound} />);
+  }
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    dispatch(addReview({comment: reviewData.text, filmId: film.id, rating: reviewData.rating}));
+  };
 
   const handleInputChange = (evt: ChangeEvent<HTMLTextAreaElement> | ChangeEvent<HTMLInputElement>) => {
     const {name, value} = evt.target;
@@ -10,7 +29,7 @@ export const ReviewForm = () => {
 
   return (
     <div className="add-review">
-      <form action="#" className="add-review__form">
+      <form className="add-review__form" onSubmit={handleSubmit}>
         <div className="rating">
           <div className="rating__stars">
 

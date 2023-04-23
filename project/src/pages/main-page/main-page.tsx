@@ -3,19 +3,23 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
 
 import { FilmList, Footer, GenresList, ShowMoreButton, SignOut, SignIn, Logo } from '../../components';
-import { AuthorizationStatus, FILM_IN_PAGE } from '../../const';
+import { AppRoute, AuthorizationStatus, FILM_IN_PAGE } from '../../const';
 
 const MainPage = (): JSX.Element => {
-  const films = useAppSelector((state) => state.films);
+  const promoFilm = useAppSelector((state) => state.promoFilm);
   const filteredFilms = useAppSelector((state) => state.filteredFilms);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const [showedFilmsCount, changeShowedFilmsCount] = useState<number>(FILM_IN_PAGE);
+
+  if (promoFilm === null) {
+    return <Link to={AppRoute.NotFound} />;
+  }
 
   return (
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={films[0].backgroundImage} alt={films[0].name}/>
+          <img src={promoFilm.backgroundImage} alt={promoFilm.name}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -28,18 +32,18 @@ const MainPage = (): JSX.Element => {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={films[0].posterImage} alt={`${films[0].name} poster`} width="218" height="327" />
+              <img src={promoFilm.posterImage} alt={`${promoFilm.name} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{films[0].name}</h2>
+              <h2 className="film-card__title">{promoFilm.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{films[0].genre}</span>
-                <span className="film-card__year">{films[0].released}</span>
+                <span className="film-card__genre">{promoFilm.genre}</span>
+                <span className="film-card__year">{promoFilm.released}</span>
               </p>
 
               <div className="film-card__buttons">
-                <Link to={`/player/${films[0].id}`} className="btn btn--play film-card__button">
+                <Link to={`/player/${promoFilm.id}`} className="btn btn--play film-card__button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"/>
                   </svg>
