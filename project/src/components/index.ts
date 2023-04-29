@@ -19,3 +19,4 @@ export {Footer} from './footer/footer';
 export {Logo} from './logo/logo';
 export {HistoryRouter} from './history-route/history-route';
 export {ErrorMessage} from './error-message/error-message';
+export {ToMyListButton} from './to-my-list-button/to-my-list-button';

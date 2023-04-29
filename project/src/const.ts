@@ -21,6 +21,7 @@ export enum ApiRoute {
   Promo = '/promo',
   Reviews = '/comments/',
   Similar = '/similar',
+  Favorite = '/favorite',
 }
 
 export const ALL_GENRES = 'All genres';

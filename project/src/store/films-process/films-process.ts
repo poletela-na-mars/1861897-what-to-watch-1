@@ -1,13 +1,14 @@
 import { FilmsProcess } from '../../types/state-type';
 import { DEFAULT_GENRE, NameSpace } from '../../const';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { loadFilms, loadPromoFilm } from '../action';
+import { loadFilms, loadFavoriteFilms } from '../action';
 
 const initialState: FilmsProcess = {
   currentGenre: DEFAULT_GENRE,
   films: [],
   isFilmsLoading: false,
-  promoFilm: null,
+  favoriteFilms: [],
+  isFavoriteFilmsLoading: false,
 };
 
 export const filmsProcess = createSlice({
@@ -24,11 +25,19 @@ export const filmsProcess = createSlice({
         state.isFilmsLoading = true;
       })
       .addCase(loadFilms.fulfilled, (state, action) => {
-        state.films = action.payload;
+        if (action.payload){
+          state.films = action.payload;
+        }
         state.isFilmsLoading = false;
       })
-      .addCase(loadPromoFilm.fulfilled, (state, action) => {
-        state.promoFilm = action.payload;
+      .addCase(loadFavoriteFilms.pending, (state) => {
+        state.isFavoriteFilmsLoading = true;
+      })
+      .addCase(loadFavoriteFilms.fulfilled, (state, action) => {
+        if (action.payload){
+          state.favoriteFilms = action.payload;
+        }
+        state.isFavoriteFilmsLoading = false;
       });
   }
 });
