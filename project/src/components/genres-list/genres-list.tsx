@@ -1,22 +1,25 @@
 import React, {MouseEvent} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
+
+import { getFilms, getGenre } from '../../store/films-process/selectors';
+import { changeGenre } from '../../store/films-process/films-process';
+
 import {ALL_GENRES} from '../../const';
-import {changeGenre, filterFilmsByCurrentGenre} from '../../store/action';
 
 type GenresListProps = {
   buttonClickHandler: () => void;
 }
 
 export const GenresList = (props: GenresListProps): JSX.Element => {
-  const currentGenre = useAppSelector((state) => state.currentGenre);
-  const films = useAppSelector((state) => state.films);
+  const currentGenre = useAppSelector(getGenre);
+  const films = useAppSelector(getFilms);
+
   const genres = [ALL_GENRES, ...Array.from(new Set([ ...films.map((film) => film.genre)].sort()))];
   const dispatch = useAppDispatch();
 
   const handleGenreChange = (event: MouseEvent<HTMLAnchorElement>, genre: string) => {
     event.preventDefault();
-    dispatch(changeGenre({newGenre: genre}));
-    dispatch(filterFilmsByCurrentGenre());
+    dispatch(changeGenre(genre));
     props.buttonClickHandler();
   };
 

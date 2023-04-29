@@ -1,8 +1,9 @@
 import { FilmList, Footer, Logo, SignOut } from '../../components';
 import { useAppSelector } from '../../hooks';
+import { getFilms } from '../../store/films-process/selectors';
 
 const MyList = (): JSX.Element => {
-  const films = useAppSelector((state) => state.films);
+  const films = useAppSelector(getFilms);
 
   return (
     <div className="user-page">
