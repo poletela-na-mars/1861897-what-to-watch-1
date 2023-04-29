@@ -2,11 +2,14 @@ import { Link, Navigate } from 'react-router-dom';
 import { Logo, ReviewForm, SignIn, SignOut } from '../../components';
 import { useAppSelector } from '../../hooks';
 
+import { getCurrentFilm } from '../../store/film-process/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+
 import { AppRoute, AuthorizationStatus } from '../../const';
 
 const AddReview = (): JSX.Element => {
-  const film = useAppSelector((state) => state.currentFilm);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const film = useAppSelector(getCurrentFilm);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   if (!film) {
     return <Navigate to={AppRoute.NotFound} />;

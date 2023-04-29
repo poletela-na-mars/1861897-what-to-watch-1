@@ -4,11 +4,13 @@ import { useAppSelector } from '../../hooks';
 
 import { FilmList, Footer, GenresList, ShowMoreButton, SignOut, SignIn, Logo } from '../../components';
 import { AppRoute, AuthorizationStatus, FILM_IN_PAGE } from '../../const';
+import { getFilteredFilms, getPromoFilm } from '../../store/films-process/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 const MainPage = (): JSX.Element => {
-  const promoFilm = useAppSelector((state) => state.promoFilm);
-  const filteredFilms = useAppSelector((state) => state.filteredFilms);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const promoFilm = useAppSelector(getPromoFilm);
+  const filteredFilms = useAppSelector(getFilteredFilms);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const [showedFilmsCount, changeShowedFilmsCount] = useState<number>(FILM_IN_PAGE);
 
   if (promoFilm === null) {

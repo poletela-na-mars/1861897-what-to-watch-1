@@ -1,4 +1,5 @@
-import {clearError, setError} from '../store/action';
+import {clearError} from '../store/action';
+import { setError } from '../store/error-process/error-process';
 import {store} from '../store';
 
 const processErrorHandle = (message: string): void => {

@@ -29,3 +29,10 @@ export const DEFAULT_GENRE = ALL_GENRES;
 export const FILM_IN_PAGE = 8;
 
 export const TIMEOUT_SHOW_ERROR = 5000;
+
+export enum NameSpace {
+  Films = 'FILMS',
+  Film = 'FILM',
+  User = 'USER',
+  Error = 'ERROR',
+}

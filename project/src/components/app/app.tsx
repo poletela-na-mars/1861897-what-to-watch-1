@@ -1,32 +1,29 @@
 import { Route, Routes } from 'react-router-dom';
-import { useEffect } from 'react';
+
+import { getIsFilmsLoading } from '../../store/films-process/selectors';
+
+import browserHistory from '../../services/browser-history';
+import { HistoryRouter } from '../history-route/history-route';
 
 import { PrivateRoute } from '../private-route/private-route';
 import { AddReview, Film, MainPage, MyList, NotFound, Player, SignIn } from '../../pages';
 import { Spinner } from '../spinner/spinner';
 
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { filterFilmsByCurrentGenre } from '../../store/action';
+import { useAppSelector } from '../../hooks';
 import { AppRoute } from '../../const';
-import browserHistory from '../../services/browser-history';
-import { HistoryRouter } from '../history-route/history-route';
+
 
 export const App = (): JSX.Element => {
-  const dispatch = useAppDispatch();
+  const isFilmsLoading = useAppSelector(getIsFilmsLoading);
 
-  useEffect(() => {
-    dispatch(filterFilmsByCurrentGenre());
-  }, [dispatch]);
 
-  const isDataLoading = useAppSelector((state) => state.isFilmsLoading);
-
-  if (isDataLoading) {
+  if (isFilmsLoading) {
     return (<Spinner />);
   }
 
   return (
     <HistoryRouter history={browserHistory}>
-      {isDataLoading && <Spinner />}
+      {isFilmsLoading && <Spinner />}
       <Routes>
         <Route
           path={AppRoute.MainPage}

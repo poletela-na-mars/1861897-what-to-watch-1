@@ -1,10 +1,11 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logout } from '../../store/action';
+import { getUser } from '../../store/user-process/selectors';
 
 export const SignOut = () => {
   const dispatch = useAppDispatch();
-  //eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
-  const avatarImage = useAppSelector((state) => state.user?.avatarUrl);
+  const user = useAppSelector(getUser);
+  const avatarImage = user?.avatarUrl;
 
   return (
     <ul className="user-block">

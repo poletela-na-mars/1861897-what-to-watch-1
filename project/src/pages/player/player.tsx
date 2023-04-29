@@ -1,11 +1,13 @@
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
 
+import { getFilms } from '../../store/films-process/selectors';
+
 import { AppRoute } from '../../const';
 
 const Player = (): JSX.Element => {
   const id = Number(useParams().id);
-  const films = useAppSelector((state) => state.films);
+  const films = useAppSelector(getFilms);
   const film = films.find((f) => f.id === id);
 
   if (!film) {
