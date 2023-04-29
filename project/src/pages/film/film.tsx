@@ -1,19 +1,15 @@
 import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Footer, Logo, RelatedFilms, SignIn, SignOut, Spinner, Tabs } from '../../components';
+import { Footer, Logo, RelatedFilms, SignIn, SignOut, Spinner, Tabs, ToMyListButton } from '../../components';
 import NotFound from '../not-found/not-found';
+
+import { loadFilmById, loadReviews, loadSimilarFilms } from '../../store/action';
+import { getCurrentFilm, getIsFilmLoading, getIsReviewsLoading, getIsSimilarFilmsLoading, getReviews, getSimilarFilms } from '../../store/film-process/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { AuthorizationStatus } from '../../const';
-import { loadFilmById, loadReviews, loadSimilarFilms } from '../../store/action';
-import {
-  getCurrentFilm,
-  getIsFilmLoading,
-  getIsReviewsLoading,
-  getIsSimilarFilmsLoading, getReviews,
-  getSimilarFilms
-} from '../../store/film-process/selectors';
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 const Film = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -72,13 +68,7 @@ const Film = (): JSX.Element => {
                   </svg>
                   <span>Play</span>
                 </Link>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add" />
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
+                <ToMyListButton film={film} />
                 {authorizationStatus === AuthorizationStatus.Auth &&
                   <Link to={`/films/${film.id}/review`} className="btn film-card__button">Add review</Link>}
               </div>

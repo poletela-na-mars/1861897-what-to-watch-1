@@ -9,3 +9,4 @@ export const getSimilarFilms = (state: StateType): FilmType[] => state[NameSpace
 export const getIsFilmLoading = (state: StateType): boolean => state[NameSpace.Film].isFilmLoading;
 export const getIsReviewsLoading = (state: StateType): boolean => state[NameSpace.Film].isReviewsLoading;
 export const getIsSimilarFilmsLoading = (state: StateType): boolean => state[NameSpace.Film].isSimilarFilmsLoading;
+export const getPromoFilm = (state: StateType): FilmType | null => state[NameSpace.Film].promoFilm;

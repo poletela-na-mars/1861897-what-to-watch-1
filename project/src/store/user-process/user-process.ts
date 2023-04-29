@@ -5,7 +5,8 @@ import {checkAuthorizationStatus, login, logout} from '../action';
 
 const initialState: UserProcess = {
   authorizationStatus: AuthorizationStatus.Unknown,
-  user: undefined
+  user: undefined,
+  isAuthorizationInProgress: false,
 };
 
 export const userProcess = createSlice({
@@ -14,12 +15,17 @@ export const userProcess = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
+      .addCase(checkAuthorizationStatus.pending, (state) => {
+        state.isAuthorizationInProgress = true;
+      })
       .addCase(checkAuthorizationStatus.fulfilled, (state, action) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
         state.user = action.payload;
+        state.isAuthorizationInProgress = false;
       })
       .addCase(checkAuthorizationStatus.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
+        state.isAuthorizationInProgress = false;
       })
       .addCase(login.fulfilled, (state, action) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
