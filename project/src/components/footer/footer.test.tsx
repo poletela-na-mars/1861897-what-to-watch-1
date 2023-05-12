@@ -10,6 +10,6 @@ describe('Footer', () => {
       </BrowserRouter>
     );
 
-    expect(screen.getByText(`© 2019 What to watch Ltd.`)).toBeInTheDocument();
+    expect(screen.getByText('© 2019 What to watch Ltd.')).toBeInTheDocument();
   });
 });

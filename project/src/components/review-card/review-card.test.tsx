@@ -10,6 +10,6 @@ describe('ReviewCard', () => {
       <ReviewCard review={mockReview}/>
     );
     expect(screen.getByText('Emely')).toBeInTheDocument();
-    expect(screen.getByText(`I personally found this movie to be boring. Definitely one of the most boring movies I've ever seen.`)).toBeInTheDocument();
+    expect(screen.getByText(/I personally found this movie to be boring. Definitely one of the most boring movies I've ever seen./i)).toBeInTheDocument();
   });
 });
