@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 
-import { App, ErrorMessage } from './components';
+import { App, ErrorMessage, HistoryRouter } from './components';
 import { store } from './store';
 import { checkAuthorizationStatus, loadFilms, loadPromoFilm } from './store/action';
+import browserHistory from './services/browser-history';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -18,7 +19,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ErrorMessage />
-      <App />
+      <HistoryRouter history={browserHistory}>
+        <App/>
+      </HistoryRouter>
     </Provider>
   </React.StrictMode>,
 );
