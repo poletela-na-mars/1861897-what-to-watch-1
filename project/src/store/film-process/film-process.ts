@@ -58,7 +58,9 @@ export const filmProcess = createSlice({
         state.isReviewsLoading = false;
       })
       .addCase(loadPromoFilm.fulfilled, (state, action) => {
-        state.promoFilm = action.payload;
+        if (action.payload) {
+          state.promoFilm = action.payload;
+        }
       })
       .addCase(changeFavoriteStatusFilm.fulfilled, (state, action) => {
         if (state.currentFilm && state.currentFilm.id === action.payload.id){

@@ -90,15 +90,19 @@ export const loadSimilarFilms = createAsyncThunk<FilmType[] | undefined, number,
   }
 );
 
-export const loadPromoFilm = createAsyncThunk<FilmType, undefined, {
+export const loadPromoFilm = createAsyncThunk<FilmType | undefined, undefined, {
   dispatch: AppDispatch;
   state: StateType;
   extra: AxiosInstance;
 }>(
   'loadPromoFilm',
-  async (_arg, {extra: api}) => {
-    const {data} = await api.get<FilmType>(ApiRoute.Promo);
-    return data;
+  async (_arg, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.get<FilmType>(ApiRoute.Promo);
+      return data;
+    } catch {
+      dispatch(redirectToRoute(AppRoute.NotFound));
+    }
   }
 );
 

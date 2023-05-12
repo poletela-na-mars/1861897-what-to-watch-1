@@ -25,18 +25,24 @@ export const filmsProcess = createSlice({
         state.isFilmsLoading = true;
       })
       .addCase(loadFilms.fulfilled, (state, action) => {
-        if (action.payload){
+        if (action.payload) {
           state.films = action.payload;
         }
+        state.isFilmsLoading = false;
+      })
+      .addCase(loadFilms.rejected, (state) => {
         state.isFilmsLoading = false;
       })
       .addCase(loadFavoriteFilms.pending, (state) => {
         state.isFavoriteFilmsLoading = true;
       })
       .addCase(loadFavoriteFilms.fulfilled, (state, action) => {
-        if (action.payload){
+        if (action.payload) {
           state.favoriteFilms = action.payload;
         }
+        state.isFavoriteFilmsLoading = false;
+      })
+      .addCase(loadFavoriteFilms.rejected, (state) => {
         state.isFavoriteFilmsLoading = false;
       });
   }

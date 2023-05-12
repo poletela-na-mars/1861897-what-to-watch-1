@@ -2,9 +2,6 @@ import { Route, Routes } from 'react-router-dom';
 
 import { getIsFilmsLoading } from '../../store/films-process/selectors';
 
-import browserHistory from '../../services/browser-history';
-import { HistoryRouter } from '../history-route/history-route';
-
 import { PrivateRoute } from '../private-route/private-route';
 import { AddReview, Film, MainPage, MyList, NotFound, Player, SignIn } from '../../pages';
 import { Spinner } from '../spinner/spinner';
@@ -22,7 +19,7 @@ export const App = (): JSX.Element => {
   }
 
   return (
-    <HistoryRouter history={browserHistory}>
+    <>
       {isFilmsLoading && <Spinner />}
       <Routes>
         <Route
@@ -58,6 +55,6 @@ export const App = (): JSX.Element => {
           element={<NotFound />}
         />
       </Routes>
-    </HistoryRouter>
+    </>
   );
 };
