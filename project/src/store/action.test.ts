@@ -13,8 +13,6 @@ import {
   loadFavoriteFilms, loadFilmById, loadFilms, loadPromoFilm, loadReviews, loadSimilarFilms, redirectToRoute
 } from './action';
 import { getMockFilm, getMockFilms, getMockReviews, getMockUser } from '../utils/mocks';
-import { type } from '@testing-library/user-event/utility/type';
-
 
 jest.mock('../services/process-error-handle.ts');
 
@@ -39,7 +37,8 @@ describe('Async action', () => {
     expect(store.getActions()).toEqual([]);
 
     await store.dispatch(loadFilms());
-    const actions = store.getActions().map(({type: A}) => type);
+    // eslint-disable-next-line  @typescript-eslint/no-unsafe-return
+    const actions = store.getActions().map(({type}) => type);
 
     expect(actions).toEqual([
       loadFilms.pending.type,
@@ -54,7 +53,8 @@ describe('Async action', () => {
     expect(store.getActions()).toEqual([]);
 
     await store.dispatch(loadFilmById(1));
-    const actions = store.getActions().map(({type: A}) => type);
+    // eslint-disable-next-line  @typescript-eslint/no-unsafe-return
+    const actions = store.getActions().map(({type}) => type);
 
     expect(actions).toEqual([
       loadFilmById.pending.type,
@@ -69,7 +69,8 @@ describe('Async action', () => {
     expect(store.getActions()).toEqual([]);
 
     await store.dispatch(loadReviews(1));
-    const actions = store.getActions().map(({type: A}) => type);
+    // eslint-disable-next-line  @typescript-eslint/no-unsafe-return
+    const actions = store.getActions().map(({type}) => type);
 
     expect(actions).toEqual([
       loadReviews.pending.type,
@@ -88,7 +89,8 @@ describe('Async action', () => {
     expect(store.getActions()).toEqual([]);
 
     await store.dispatch(addReview(mockComment));
-    const actions = store.getActions().map(({type: A}) => type);
+    // eslint-disable-next-line  @typescript-eslint/no-unsafe-return
+    const actions = store.getActions().map(({type}) => type);
 
     expect(actions).toEqual([
       addReview.pending.type,
@@ -104,7 +106,8 @@ describe('Async action', () => {
     expect(store.getActions()).toEqual([]);
 
     await store.dispatch(loadSimilarFilms(1));
-    const actions = store.getActions().map(({type: A}) => type);
+    // eslint-disable-next-line  @typescript-eslint/no-unsafe-return
+    const actions = store.getActions().map(({type}) => type);
 
     expect(actions).toEqual([
       loadSimilarFilms.pending.type,
@@ -119,7 +122,8 @@ describe('Async action', () => {
     expect(store.getActions()).toEqual([]);
 
     await store.dispatch(loadPromoFilm());
-    const actions = store.getActions().map(({type: A}) => type);
+    // eslint-disable-next-line  @typescript-eslint/no-unsafe-return
+    const actions = store.getActions().map(({type}) => type);
 
     expect(actions).toEqual([
       loadPromoFilm.pending.type,
@@ -134,7 +138,8 @@ describe('Async action', () => {
     expect(store.getActions()).toEqual([]);
 
     await store.dispatch(loadFavoriteFilms());
-    const actions = store.getActions().map(({type: A}) => type);
+    // eslint-disable-next-line  @typescript-eslint/no-unsafe-return
+    const actions = store.getActions().map(({type}) => type);
 
     expect(actions).toEqual([
       loadFavoriteFilms.pending.type,
@@ -149,7 +154,8 @@ describe('Async action', () => {
     expect(store.getActions()).toEqual([]);
 
     await store.dispatch(changeFavoriteStatusFilm({filmId: 1, status: true}));
-    const actions = store.getActions().map(({type: A}) => type);
+    // eslint-disable-next-line  @typescript-eslint/no-unsafe-return
+    const actions = store.getActions().map(({type}) => type);
 
     expect(actions).toEqual([
       changeFavoriteStatusFilm.pending.type,
@@ -164,7 +170,8 @@ describe('Async action', () => {
     expect(store.getActions()).toEqual([]);
 
     await store.dispatch(checkAuthorizationStatus());
-    const actions = store.getActions().map(({type: A}) => type);
+    // eslint-disable-next-line  @typescript-eslint/no-unsafe-return
+    const actions = store.getActions().map(({type}) => type);
 
     expect(actions).toEqual([
       checkAuthorizationStatus.pending.type,
@@ -178,7 +185,8 @@ describe('Async action', () => {
     expect(store.getActions()).toEqual([]);
 
     await store.dispatch(clearError());
-    const actions = store.getActions().map(({type: A}) => type);
+    // eslint-disable-next-line  @typescript-eslint/no-unsafe-return
+    const actions = store.getActions().map(({type}) => type);
 
     expect(actions).toEqual([
       clearError.pending.type,
