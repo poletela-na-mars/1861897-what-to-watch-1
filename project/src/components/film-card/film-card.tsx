@@ -41,7 +41,7 @@ const MemoFilmCard = (props: FilmCardProps): JSX.Element => {
           <img src={props.film.previewImage} alt={props.film.name} width="280" height="175" />}
       </div>
       <h3 className="small-film-card__title">
-        <Link to={`/films/${props.film.id}`} className="small-film-card__link">{props.film.name}</Link>
+        <Link to={`/films/${props.film.id}`} data-testid="card-link" className="small-film-card__link">{props.film.name}</Link>
       </h3>
     </article>
   );
