@@ -5,7 +5,7 @@ import { ShowMoreButton } from './show-more-button';
 describe('ShowMoreButton', () => {
   it('should render correctly', () => {
     render(<ShowMoreButton buttonClickHandler={() => ({})}/>);
-    expect(screen.getByText('Show more')).toBeInTheDocument();
+    expect(screen.getByText(/Show more/i)).toBeInTheDocument();
   });
 
   it('should call handler, when click button', async () => {

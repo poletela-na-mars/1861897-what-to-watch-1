@@ -72,7 +72,7 @@ describe('Film', () => {
 
     expect(screen.getByText(mockFilm.name)).toBeInTheDocument();
     expect(screen.getByText(mockFilm.description)).toBeInTheDocument();
-    expect(screen.getByText('Overview')).toBeInTheDocument();
+    expect(screen.getByText(/Overview/i)).toBeInTheDocument();
     expect(screen.getByText(/Add Review/i)).toBeInTheDocument();
   });
 
@@ -100,8 +100,8 @@ describe('Film', () => {
 
     expect(screen.getByText(mockFilm.name)).toBeInTheDocument();
     expect(screen.getByText(mockFilm.description)).toBeInTheDocument();
-    expect(screen.getByText('Overview')).toBeInTheDocument();
-    expect(screen.queryByText('Add Review')).not.toBeInTheDocument();
+    expect(screen.getByText(/Overview/i)).toBeInTheDocument();
+    expect(screen.queryByText(/Add Review/i)).not.toBeInTheDocument();
   });
 
   it('should redirect to AppRoute.Player, when click play button', () => {
@@ -109,7 +109,7 @@ describe('Film', () => {
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
-            <Route path={AppRoute.Player} element={<p>PlayerScreen</p>}/>
+            <Route path={AppRoute.Player} element={<p>Player</p>}/>
             <Route path="*" element={<Film />} />
           </Routes>
         </BrowserRouter>
@@ -118,7 +118,7 @@ describe('Film', () => {
 
     fireEvent.click(screen.getByTestId('play-button'));
 
-    expect(screen.getByText('PlayerScreen')).toBeInTheDocument();
+    expect(screen.getByText(/Player/i)).toBeInTheDocument();
   });
 
   it('should redirect to AppRoute.AddReview, when click add review button', () => {
@@ -126,7 +126,7 @@ describe('Film', () => {
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
-            <Route path={AppRoute.AddReview} element={<p>AddReviewScreen</p>}/>
+            <Route path={AppRoute.AddReview} element={<p>AddReview</p>}/>
             <Route path="*" element={<Film />} />
           </Routes>
         </BrowserRouter>
@@ -135,7 +135,7 @@ describe('Film', () => {
 
     fireEvent.click(screen.getByTestId('add-review-button'));
 
-    expect(screen.getByText('AddReviewScreen')).toBeInTheDocument();
+    expect(screen.getByText(/AddReview/i)).toBeInTheDocument();
   });
 
   it('should redirect to AppRoute.SignIn, when click toMyList button and authorizationStatus is NoAuth', async () => {

@@ -30,6 +30,6 @@ describe('ErrorMessage', () => {
       </Provider>
     );
 
-    expect(screen.getByText('testError')).toBeInTheDocument();
+    expect(screen.getByText(/testError/i)).toBeInTheDocument();
   });
 });

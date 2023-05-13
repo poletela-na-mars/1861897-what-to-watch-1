@@ -94,7 +94,7 @@ describe('MainPage', () => {
     );
 
     expect(screen.getByText(mockFilm.name)).toBeInTheDocument();
-    expect(screen.getByText('Sign in')).toBeInTheDocument();
+    expect(screen.getByText(/Sign in/i)).toBeInTheDocument();
   });
 
   it('should render correctly, when Auth', () => {
@@ -125,7 +125,7 @@ describe('MainPage', () => {
     );
 
     expect(screen.getByText(mockFilm.name)).toBeInTheDocument();
-    expect(screen.getByText('Sign out')).toBeInTheDocument();
+    expect(screen.getByText(/Sign out/i)).toBeInTheDocument();
   });
 
   it('should render showMoreButton, when count films > 8', () => {
@@ -137,7 +137,7 @@ describe('MainPage', () => {
       </Provider>
     );
 
-    expect(screen.getByText('Show more')).toBeInTheDocument();
+    expect(screen.getByText(/Show more/i)).toBeInTheDocument();
   });
 
   it('should add film, when click showMoreButton', async () => {
@@ -149,14 +149,14 @@ describe('MainPage', () => {
       </Provider>
     );
 
-    expect(screen.getByText('Show more')).toBeInTheDocument();
+    expect(screen.getByText(/Show more/i)).toBeInTheDocument();
 
     const filmCardsBeforeClick = screen.getAllByTestId('card-link');
     expect(filmCardsBeforeClick.length).toBe(8);
 
 
-    await userEvent.click(screen.getByText('Show more'));
-    expect(screen.queryByText('Show more')).not.toBeInTheDocument();
+    await userEvent.click(screen.getByText(/Show more/i));
+    expect(screen.queryByText(/Show more/i)).not.toBeInTheDocument();
 
     const filmCardsAfterClick = screen.getAllByTestId('card-link');
     expect(filmCardsAfterClick.length).toBe(mockExtendedFilms.length);
@@ -191,7 +191,7 @@ describe('MainPage', () => {
       </Provider>
     );
 
-    expect(screen.queryByText('Show more')).not.toBeInTheDocument();
+    expect(screen.queryByText(/Show more/i)).not.toBeInTheDocument();
   });
 
   it('should redirect to AppRoute.SignIn, when click toMyList button and authorizationStatus is NoAuth', async () => {

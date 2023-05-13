@@ -35,7 +35,7 @@ describe('SignOut', () => {
         </BrowserRouter>
       </Provider>);
 
-    expect(screen.getByText('Sign out')).toBeInTheDocument();
+    expect(screen.getByText(/Sign out/i)).toBeInTheDocument();
   });
 
   it('should dispatch logout, when click by button', async () => {

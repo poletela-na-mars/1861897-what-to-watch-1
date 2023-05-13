@@ -16,7 +16,7 @@ describe('SignIn', () => {
         <SignIn />
       </BrowserRouter>);
 
-    expect(screen.getByText('Sign in')).toBeInTheDocument();
+    expect(screen.getByText(/Sign in/i)).toBeInTheDocument();
   });
 
   it('should redirect to AppRoute.SignIn, when click by Link', async () => {
