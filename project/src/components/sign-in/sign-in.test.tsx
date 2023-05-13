@@ -29,8 +29,8 @@ describe('SignIn', () => {
       </HistoryRouter>
     );
 
-    await userEvent.click(screen.getByRole('link'));
+    await userEvent.click(screen.getByRole(/link/i));
 
-    expect(screen.getByText('SignIn')).toBeInTheDocument();
+    expect(screen.getByText(/SignIn/i)).toBeInTheDocument();
   });
 });
