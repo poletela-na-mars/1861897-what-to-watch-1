@@ -45,7 +45,7 @@ export const ReviewForm = () => {
         <div className="add-review__text">
           <textarea required className="add-review__textarea" name="text" id="review-text" placeholder="Review text" value={reviewData.text} onChange={handleInputChange} />
           <div className="add-review__submit">
-            <button className="add-review__btn" type="submit">Post</button>
+            <button className="add-review__btn" type="submit" data-testid="post-button">Post</button>
           </div>
         </div>
       </form>

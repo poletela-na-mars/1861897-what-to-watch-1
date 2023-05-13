@@ -26,13 +26,13 @@ export const Tabs = (props: TabsProps): JSX.Element => {
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
           <li className={selectedTab === TabNames.Overview ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}>
-            <a className="film-nav__link" onClick={() => setSelectedTab(TabNames.Overview)}>Overview</a>
+            <button style={{border: 'none', background: 'transparent'}} className="film-nav__link" data-testid="overview-tab" onClick={() => setSelectedTab(TabNames.Overview)}>Overview</button>
           </li>
           <li className={selectedTab === TabNames.Details ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}>
-            <a className="film-nav__link" onClick={() => setSelectedTab(TabNames.Details)}>Details</a>
+            <button style={{border: 'none', background: 'transparent'}} className="film-nav__link" data-testid="details-tab" onClick={() => setSelectedTab(TabNames.Details)}>Details</button>
           </li>
           <li className={selectedTab === TabNames.Reviews ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}>
-            <a className="film-nav__link" onClick={() => setSelectedTab(TabNames.Reviews)}>Reviews</a>
+            <button style={{border: 'none', background: 'transparent'}} className="film-nav__link" data-testid="reviews-tab" onClick={() => setSelectedTab(TabNames.Reviews)}>Reviews</button>
           </li>
         </ul>
       </nav>

@@ -62,7 +62,7 @@ const Film = (): JSX.Element => {
               </p>
 
               <div className="film-card__buttons">
-                <Link to={`/player/${film.id}`} className="btn btn--play film-card__button">
+                <Link to={`/player/${film.id}`} className="btn btn--play film-card__button" data-testid="play-button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s" />
                   </svg>
@@ -70,7 +70,7 @@ const Film = (): JSX.Element => {
                 </Link>
                 <ToMyListButton film={film} />
                 {authorizationStatus === AuthorizationStatus.Auth &&
-                  <Link to={`/films/${film.id}/review`} className="btn film-card__button">Add review</Link>}
+                  <Link to={`/films/${film.id}/review`} className="btn film-card__button" data-testid="add-review-button">Add review</Link>}
               </div>
             </div>
           </div>

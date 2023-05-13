@@ -17,7 +17,7 @@ export const SignOut = () => {
       </li>
       <li className="user-block__item">
         {/*eslint-disable-next-line @typescript-eslint/no-misused-promises*/}
-        <a onClick={async () => await dispatch(logout())} className="user-block__link">Sign out</a>
+        <button style={{border: 'none', background: 'transparent'}} onClick={async () => await dispatch(logout())} className="user-block__link">Sign out</button>
       </li>
     </ul>
   );

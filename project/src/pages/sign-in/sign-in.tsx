@@ -21,13 +21,6 @@ const SignIn = (): JSX.Element => {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
-        {/*<div className="logo">*/}
-        {/*  <a href="main.html" className="logo__link">*/}
-        {/*    <span className="logo__letter logo__letter--1">W</span>*/}
-        {/*    <span className="logo__letter logo__letter--2">T</span>*/}
-        {/*    <span className="logo__letter logo__letter--3">W</span>*/}
-        {/*  </a>*/}
-        {/*</div>*/}
         <Logo />
 
         <h1 className="page-title user-page__title">Sign in</h1>
@@ -37,11 +30,11 @@ const SignIn = (): JSX.Element => {
         <form className="sign-in__form" onSubmit={handleSubmit}>
           <div className="sign-in__fields">
             <div className="sign-in__field">
-              <input className="sign-in__input" required ref={emailRef} type="email" placeholder="Email address" name="user-email" id="user-email" />
+              <input className="sign-in__input" required ref={emailRef} type="email" placeholder="Email address" name="user-email" id="user-email" data-testid="email-input" />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
             <div className="sign-in__field">
-              <input className="sign-in__input" required ref={passwordRef} type="password" placeholder="Password" name="user-password" id="user-password" />
+              <input className="sign-in__input" required ref={passwordRef} type="password" placeholder="Password" name="user-password" id="user-password" data-testid="password-input" />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
           </div>
@@ -51,20 +44,6 @@ const SignIn = (): JSX.Element => {
         </form>
       </div>
 
-      {/*TODO - remove comments*/}
-      {/*<footer className="page-footer">*/}
-      {/*  <div className="logo">*/}
-      {/*    <a href="main.html" className="logo__link logo__link--light">*/}
-      {/*      <span className="logo__letter logo__letter--1">W</span>*/}
-      {/*      <span className="logo__letter logo__letter--2">T</span>*/}
-      {/*      <span className="logo__letter logo__letter--3">W</span>*/}
-      {/*    </a>*/}
-      {/*  </div>*/}
-
-      {/*  <div className="copyright">*/}
-      {/*    <p>© 2019 What to watch Ltd.</p>*/}
-      {/*  </div>*/}
-      {/*</footer>*/}
       <Footer />
     </div>
   );

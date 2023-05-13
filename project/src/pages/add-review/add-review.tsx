@@ -31,7 +31,7 @@ const AddReview = (): JSX.Element => {
                 <Link to={`/films/${film.id}`} className="breadcrumbs__link">{film.name}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link">Add review</a>
+                <button style={{border: 'none', background: 'transparent'}} className="breadcrumbs__link">Add review</button>
               </li>
             </ul>
           </nav>
